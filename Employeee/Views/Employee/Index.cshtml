@@ -1,0 +1,476 @@
+﻿@model Employee.Application.Models.EmployeeViewModel
+@{
+    ViewData["Title"] = "Employee ";
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-6 ">
+            <div class="card employee_card">
+                <div class="employee_display">
+                    <p class="form-text">-- Employee List --</p>
+                    <table class="table">
+                        <thead class="employee_table_heading">
+                            <tr>
+                                <th scope="col">Employee ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Salary</th>
+                                <th scope="col">Date of Birth</th>
+                                <th scope="col">Join date</th>
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="employee_table_rows">
+
+                            @foreach (var employee in Model.EmployeeList)
+                            {
+                                <tr>
+                                    <th scope="row" id="empId_@employee.Id">@employee.Id</th>
+                                    <td id="empName_@employee.Id" data-val="@employee.Name">@employee.Name</td>
+                                    <td id="empGender_@employee.Id" data-val="@employee.Gender">@employee.Gender</td>
+                                    <td id="empSalary_@employee.Id" data-val="@employee.Salary">@employee.Salary</td>
+                                    <td id="empDOB_@employee.Id" data-val="@employee.DOB">@employee.DOB</td>
+                                    <td id="empJoinDate_@employee.Id" data-val="@employee.JoinDate">@employee.JoinDate</td>
+                                    <td>
+                                        <button title="Edit" class="btn btn-sm btn-primary" onclick="editEmployee(@employee.Id)"> <i class="fas fa-edit"></i></button>
+                                        <button title="Delete" class="btn btn-sm btn-danger" onclick="deleteEmployee(@employee.Id)"> <i class="fas fa-remove"></i></button>
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card employee_form_card">
+                <div class="">
+                    <form asp-action="Manage" asp-controller="Employee" id="empLoyeeForm" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <p class="form-text">-- Employee Form --</p>
+                        <div class="form-group row">
+                            <label asp-for="Employee.Name" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" asp-for="Employee.Name" class="form-control" id="inputName" placeholder="Employee Name">
+                                <span class="text-danger" asp-validation-for="Employee.Name"></span>
+                            </div>
+                        </div>
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <label asp-for="Employee.Gender" class="col-form-label col-sm-2 pt-0"></label>
+                                <div class="col-sm-8">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" asp-for="Employee.Gender" id="male" value="Male" checked>
+                                        <label class="form-check-label" for="gridRadios1">
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" asp-for="Employee.Gender" id="female" value="Female">
+                                        <label class="form-check-label" for="gridRadios2">
+                                            Female
+                                        </label>
+                                    </div>
+                                    <div class="form-check disabled">
+                                        <input class="form-check-input" type="radio" asp-for="Employee.Gender" id="thirdGender" value="third gender">
+                                        <label class="form-check-label" for="gridRadios3">
+                                            third gender
+                                        </label>
+                                    </div>
+                                </div>
+                                <span class="text-danger" asp-validation-for="Employee.Gender"></span>
+                            </div>
+                        </fieldset>
+                        <div class="form-group row">
+                            <label asp-for="Employee.DOB" class="col-sm-2 col-form-label">DOB</label>
+                            <div class="col-sm-8">
+                                <input type="date" asp-for="Employee.DOB" class="form-control" id="inputDOB" placeholder="Date of birth">
+                                <span class="text-danger" asp-validation-for="Employee.DOB"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Employee.Salary" class="col-sm-2 col-form-label">Salary</label>
+                            <div class="col-sm-8">
+                                <input type="text" asp-for="Employee.Salary" class="form-control" id="inputSalary" placeholder="Salary">
+                                <span class="text-danger" asp-validation-for="Employee.Salary"></span>
+                            </div>
+                        </div>
+                        <div class="card qualification_card">
+                            <div class="employee_display">
+                                <p class="form-text">-- Employee Qualification --</p>
+                                <div class="qualificationInput">
+                                    <fieldset class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label class="form-label">Qualification:</label>
+                                            </div>
+                                            <div class="col-sm-4 ml-5">
+                                                <Select asp-for="Qualification.QId" id="inputQualificationId" class="form-control">
+                                                    @if (Model.QualificationList != null)
+                                                    {
+                                                        @if (Model.QualificationList.Count != 0)
+                                                        {
+                                                            foreach (var Qualification in Model.QualificationList)
+                                                            {
+                                                                <option class="form-control" value="@Qualification.QId">@Qualification.Name</option>
+                                                            }
+                                                        }
+
+                                                    }
+
+                                                </Select>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <label asp-for="Qualification.Marks" class="form-label">Marks:</label>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <input asp-for="Qualification.Marks" class="form-control" type="text" name="marks" id="inputMarks">
+                                                <span class="text-danger" id="inputMarksError"></span>
+                                            </div>
+
+
+                                            <div class="col-sm-2">
+                                                <button type="button" id="addQualification" class="btn btn-primary">Add</button>
+                                            </div>
+
+
+                                        </div>
+
+                                    </fieldset>
+                                </div>
+                                <table class="table">
+                                    <thead class="employee_table_heading">
+                                        <tr>
+                                            <th scope="col">Q_Id</th>
+                                            <th scope="col">Qualification</th>
+                                            <th scope="col">Marks</th>
+                                            <th scope="col">Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="employee_table_rows" id="inputQualificationRows">
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                        <input type="hidden" asp-for="Employee.Id" id="employeeId" />
+                        <input type="hidden" name="qlist" id="qlist" value="" />
+
+                        <div class="form-group row float-right mt-2">
+                            <div class="col-sm-5" id="saveButton">
+                                <button type="submit" class="btn btn-primary" id="saveForm">Save</button>
+                            </div>
+                            <div class="col-sm-5">
+                                <button type="button" class="btn btn-secondary" onclick="cancelClick()">Cancel</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalTitle">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" onclick="window.location.reload()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalTitle">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+
+       var qualificationList=[];
+        //disable future date
+        //$(document).ready(fuction(){
+        //      $("#inputDOB").datepicker({
+        //         maxDate: 0
+        //        });
+        //})
+
+       $('#addQualification').click(function() {
+            var Qualification = {QId:null,QName:null,Marks:null}
+            var qualificationId =$("#inputQualificationId").val();
+            var marks =$("#inputMarks").val();
+            var QualificationName = $("#inputQualificationId").find("option:selected").text();
+            var valid =(marks===null || marks===undefined || marks==="")?false:true;
+               if(valid)
+               {   $('#inputMarksError').html('');
+                    Qualification.QId=qualificationId
+                    Qualification.Marks=marks
+                    Qualification.QName=QualificationName
+                    addInQualificationList(Qualification);
+                    renderQualificationTable();
+                    $("#inputMarks").val('');
+               }
+           else{
+               $('#inputMarksError').html('Marks is required!!');
+               }
+        });
+
+      function addInQualificationList(Qualification){
+             var contains=false;
+             if(qualificationList.length>0)
+                    {
+
+                          qualificationList.forEach(function(item){
+                          if(item.QId==Qualification.QId)
+                          {
+                               item.Marks=Qualification.Marks;
+                               contains=true;
+                          }
+                          });
+                          if(!contains)
+                          {
+                              qualificationList.push(Qualification);
+                          }
+                    }
+                else
+                  {
+                      qualificationList.push(Qualification);
+                  }
+                  $('#qlist').val(JSON.stringify(qualificationList));
+         }
+
+      function removeFromQualificationList(Qualification){
+            qualificationList.forEach(function(item){
+                        console.log("Before",item);
+                    });
+             if(qualificationList.length>0)
+                    {
+
+                          qualificationList.forEach(function(item ,index){
+                          if(item.QId==Qualification.QId)
+                          {
+                               qualificationList.splice(index, 1);
+                               console.log({index})
+                               console.log({item})
+                          }
+                          });
+
+                    }
+                    qualificationList.forEach(function(item){
+                        console.log("After",item);
+                    });
+
+                    $('#qlist').val(JSON.stringify(qualificationList));
+
+         }
+
+
+     function  editEmployee (Id){
+              var Qualification = {QId:null,QName:null,Marks:null};
+              var Name = $(`#empName_${Id}`).data("val");
+              var DOB = $(`#empDOB_${Id}`).data("val");
+              var Gender = $(`#empGender_${Id}`).data("val");
+              var Salary = $(`#empSalary_${Id}`).data("val");
+              $('#inputName').val(Name);
+              $('#inputDOB').val(DOB);
+              Gender=Gender.toString().toUpperCase();
+              if(Gender=="MALE")
+              {
+                $('#male').trigger('click');
+              }
+              else if (Gender=="FEMALE")
+              {
+                $('#female').trigger('click');
+              }
+              else if(Gender=="THIRD GENDER")
+              {
+                $('#thirdGender').trigger('click');
+              }
+              $('#inputDOB').val(DOB);
+              $('#inputSalary').val(Salary);
+              $('#employeeId').val(Id);
+              $('#saveForm').html('Update');
+               loadQualification(Id).then((load)=>{
+                  renderQualificationTable();
+               });
+        }
+
+
+     function deleteEmployee (Id){
+          $('.modal-body').html(`Do you really want to delete this employee?`)
+           var verificationToken= $('input:hidden[name="__RequestVerificationToken"]').val();
+          $('#deleteModal').modal('show');
+           $('#confirmDelete').click(function(){
+                             $.ajax({
+                                    type: "POST",
+                                    url: "/Employee/Delete",
+                                    beforeSend: function (xhr) {
+                                        xhr.setRequestHeader("XSRF-TOKEN",verificationToken);
+                                    },
+                                    data: {"__RequestVerificationToken":verificationToken, "Id": Id },
+                                    success: function (response) {
+                                            window.location.reload();
+                                    },
+                                    failure: function (response) {
+                                        alert(response.responseText);
+
+                                    },
+                                    error: function (response) {
+                                        alert(response.responseText);
+
+                                    }
+                                });
+
+           })
+        }
+
+     function  loadQualification(Id)
+        {   qualificationList.length = 0;
+            var load=renderQualificationTable();
+            var verificationToken= $('input:hidden[name="__RequestVerificationToken"]').val();
+            return  new Promise((resolve,reject) => {
+                             $.ajax({
+                                    type: "POST",
+                                    url: "/Employee/GetQualifications",
+                                    beforeSend: function (xhr) {
+                                        xhr.setRequestHeader("XSRF-TOKEN",verificationToken);
+                                    },
+                                    data: {"__RequestVerificationToken":verificationToken, "Id": Id },
+                                    success: function (response) {
+                                        response.data.forEach(function(item){
+                                            var Qualification = {QId:null,QName:null,Marks:null}
+                                            Qualification.QId=item.qId;
+                                            Qualification.QName=item.name;
+                                            Qualification.Marks=item.marks;
+                                            addInQualificationList(Qualification);
+                                        });
+                                         resolve(load);
+                                    },
+                                    failure: function (response) {
+                                        alert(response.responseText);
+                                        resolve(load);
+                                    },
+                                    error: function (response) {
+                                        alert(response.responseText);
+                                        resolve(load);
+                                    }
+                                });
+                    });
+        }
+
+
+    function deleteQualification (e,Id){
+            e.preventDefault();
+            var Qualification = {QId:null,QName:null,Marks:null}
+                Qualification.QId=Id;
+            var type = $('#saveForm').html();
+                type=type.toString().toUpperCase();
+                if(type=="UPDATE")
+                   {
+                       var verificationToken= $('input:hidden[name="__RequestVerificationToken"]').val();
+                       var eId = $('#employeeId').val();
+                        $('.modal-body').html(`Do you really want to remove this qualification?`)
+                        $('#deleteModal').modal('show');
+                       $('#confirmDelete').click(function(){
+                                         $.ajax({
+                                                type: "POST",
+                                                url: "/Employee/DeleteQualification",
+                                                beforeSend: function (xhr) {
+                                                    xhr.setRequestHeader("XSRF-TOKEN",verificationToken);
+                                                },
+                                                data: {"__RequestVerificationToken":verificationToken, "QId": Id ,"EId":eId },
+                                                success: function (response) {
+                                                        window.location.reload();
+                                                },
+                                                failure: function (response) {
+                                                    alert(response.responseText);
+
+                                                },
+                                                error: function (response) {
+                                                    alert(response.responseText);
+
+                                                }
+                                            });
+
+                       });
+                   }
+                   else{
+                        removeFromQualificationList(Qualification);
+                        renderQualificationTable();
+                   }
+
+      }
+
+
+    function renderQualificationTable() {
+            var htmlTable="";
+             qualificationList.forEach(function(item){
+                      var htmlTableRow=`<tr id='inputQualificationRowsId_${item.QId}'><th scope='row'>${item.QId}</th><td>${item.QName}</td><td>${item.Marks}</td><td><button title="Delete" type="button" class="btn btn-sm btn-danger" onclick="deleteQualification(event,'${item.QId}')"> <i class="fas fa-remove"></i></button></td></tr>`;
+                       htmlTable+=htmlTableRow;
+                  });
+            $(`#inputQualificationRows`).html('');
+            $(`#inputQualificationRows`).prepend(htmlTable);
+      }
+
+
+    function cancelClick(){
+          $('.modal-body').html(`Do you really want to cancel changes in form?`)
+          $('#confirmationModal').modal('show');
+      }
+
+</script>
+ }

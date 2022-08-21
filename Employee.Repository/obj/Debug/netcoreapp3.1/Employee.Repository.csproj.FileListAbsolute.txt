@@ -1,0 +1,13 @@
+D:\InterviewProjecct\Employee.Repository\bin\Debug\netcoreapp3.1\Employee.Repository.deps.json
+D:\InterviewProjecct\Employee.Repository\bin\Debug\netcoreapp3.1\Employee.Repository.dll
+D:\InterviewProjecct\Employee.Repository\bin\Debug\netcoreapp3.1\Employee.Repository.pdb
+D:\InterviewProjecct\Employee.Repository\bin\Debug\netcoreapp3.1\Employee.Shared.dll
+D:\InterviewProjecct\Employee.Repository\bin\Debug\netcoreapp3.1\Employee.Shared.pdb
+D:\InterviewProjecct\Employee.Repository\obj\Debug\netcoreapp3.1\Employee.Repository.csproj.AssemblyReference.cache
+D:\InterviewProjecct\Employee.Repository\obj\Debug\netcoreapp3.1\Employee.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\InterviewProjecct\Employee.Repository\obj\Debug\netcoreapp3.1\Employee.Repository.AssemblyInfoInputs.cache
+D:\InterviewProjecct\Employee.Repository\obj\Debug\netcoreapp3.1\Employee.Repository.AssemblyInfo.cs
+D:\InterviewProjecct\Employee.Repository\obj\Debug\netcoreapp3.1\Employee.Repository.csproj.CoreCompileInputs.cache
+D:\InterviewProjecct\Employee.Repository\obj\Debug\netcoreapp3.1\Employee.Repository.csproj.CopyComplete
+D:\InterviewProjecct\Employee.Repository\obj\Debug\netcoreapp3.1\Employee.Repository.dll
+D:\InterviewProjecct\Employee.Repository\obj\Debug\netcoreapp3.1\Employee.Repository.pdb
