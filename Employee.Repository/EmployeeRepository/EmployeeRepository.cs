@@ -11,10 +11,11 @@ namespace Employee.Repository.EmployeeRepository
     public class EmployeeRepository:IEmployeeRepository
     {
         
-        readonly  Repo repository;
+        readonly Repository repository;
+        
         public EmployeeRepository()
         {
-            repository=new Repo();
+            repository=new Repository();
         }
         public List<EmployeeCommonModel> GetEmployees()
         {

@@ -1,3 +1,4 @@
+using Employee.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,7 @@ namespace Employeee
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<ICommonRepository, CommonRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

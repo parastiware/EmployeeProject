@@ -8,3 +8,13 @@ D:\InterviewProjecct\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.Ass
 D:\InterviewProjecct\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.csproj.CoreCompileInputs.cache
 D:\InterviewProjecct\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.dll
 D:\InterviewProjecct\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.pdb
+D:\MyProject\EmployeeProject\Employee.Shared\bin\Debug\netcoreapp3.1\Employee.Shared.deps.json
+D:\MyProject\EmployeeProject\Employee.Shared\bin\Debug\netcoreapp3.1\Employee.Shared.dll
+D:\MyProject\EmployeeProject\Employee.Shared\bin\Debug\netcoreapp3.1\Employee.Shared.pdb
+D:\MyProject\EmployeeProject\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.csproj.AssemblyReference.cache
+D:\MyProject\EmployeeProject\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyProject\EmployeeProject\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.AssemblyInfoInputs.cache
+D:\MyProject\EmployeeProject\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.AssemblyInfo.cs
+D:\MyProject\EmployeeProject\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.csproj.CoreCompileInputs.cache
+D:\MyProject\EmployeeProject\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.dll
+D:\MyProject\EmployeeProject\Employee.Shared\obj\Debug\netcoreapp3.1\Employee.Shared.pdb

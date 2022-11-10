@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\EmployeeProject\\Employee.Shared\\Employee.Shared.csproj": {}
+    "D:\\MyProject\\EmployeeProject\\Employee.Shared\\Employee.Shared.csproj": {}
   },
   "projects": {
-    "D:\\EmployeeProject\\Employee.Shared\\Employee.Shared.csproj": {
+    "D:\\MyProject\\EmployeeProject\\Employee.Shared\\Employee.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\EmployeeProject\\Employee.Shared\\Employee.Shared.csproj",
+        "projectUniqueName": "D:\\MyProject\\EmployeeProject\\Employee.Shared\\Employee.Shared.csproj",
         "projectName": "Employee.Shared",
-        "projectPath": "D:\\EmployeeProject\\Employee.Shared\\Employee.Shared.csproj",
-        "packagesPath": "C:\\Users\\paras\\.nuget\\packages\\",
-        "outputPath": "D:\\EmployeeProject\\Employee.Shared\\obj\\",
+        "projectPath": "D:\\MyProject\\EmployeeProject\\Employee.Shared\\Employee.Shared.csproj",
+        "packagesPath": "C:\\Users\\NPS-User\\.nuget\\packages\\",
+        "outputPath": "D:\\MyProject\\EmployeeProject\\Employee.Shared\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\paras\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\NPS-User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

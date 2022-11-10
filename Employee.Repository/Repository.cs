@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -6,15 +7,21 @@ using Employee.Shared;
 using System.Data.SqlClient;
 namespace Employee.Repository
 {
-    public  class Repo
+    public class Repository:CommonRepository
     {
-         SqlConnection connection;
-         public Repo()
+        SqlConnection connection;
+        ICommonRepository commonRepository;
+        public Repository()
         {
+           
+            commonRepository = new CommonRepository();
             Init();
+
         }
         private void Init()
         {
+            
+           
             connection = new SqlConnection(GetConnectionString());
 
 
@@ -25,15 +32,30 @@ namespace Employee.Repository
                 connection.Close();
             connection.Open();
         }
-       private void closeConnection()
+        private void closeConnection()
         {
             if (connection.State == System.Data.ConnectionState.Open)
                 connection.Close();
         }
         private string GetConnectionString()
         {
-            //return ConfigurationManager.ConnectionStrings["sqlServer"] != null ? ConfigurationManager.ConnectionStrings["sqlServer"].ConnectionString : "";
-            return "Data Source=DESKTOP-H3OBPM1\\SQLEXPRESS;Initial Catalog=Employee;Persist Security Info=True;User ID=sa;Password=sa1234";
+            string connectionString = "";
+            try
+            {
+                connectionString = commonRepository.GetConnectionstring();
+            }
+            catch (Exception ex)
+            {
+                connectionString = "Data Source=LAPTOP-J78AR7TI\\SQLEXPRESS;Initial Catalog=Employee;Persist Security Info=True;User ID=sa;Password=sa1234";
+            }
+            finally
+            {
+                if (string.IsNullOrEmpty(connectionString))
+                    connectionString = "Data Source=LAPTOP-J78AR7TI\\SQLEXPRESS;Initial Catalog=Employee;Persist Security Info=True;User ID=sa;Password=sa1234";
+
+            }
+
+            return connectionString;
         }
 
         public DataTable ExecuteDataTable(string procName, List<SqlParameters> parameters)
@@ -45,28 +67,28 @@ namespace Employee.Repository
             {
                 cmd = new System.Data.SqlClient.SqlCommand(procName, connection);
                 if (parameters != null)
-                    foreach(SqlParameters param in parameters)
+                    foreach (SqlParameters param in parameters)
                     {
-                        cmd.Parameters.AddWithValue(param.ParameterName,param.ParameterValue);
+                        cmd.Parameters.AddWithValue(param.ParameterName, param.ParameterValue);
                     }
-                    
+
                 cmd.CommandType = CommandType.StoredProcedure;
                 da.SelectCommand = cmd;
                 da.Fill(dt);
-                
+
             }
             catch (Exception x)
             {
                 dt.Rows.Add(9, x.Message);
-                
+
             }
             finally
             {
                 cmd.Dispose();
                 closeConnection();
-                
+
             }
-            
+
             return dt;
         }
 
